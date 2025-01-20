@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aravind Ashok | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+/* Modern Dark Professional Portfolio Styles */
+:root {
+    --primary-color: #2d5af1;
+    --secondary-color: #1a1a1a;
+    --background-color: #121212;
+    --card-background: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --light-gray: #2a2a2a;
+    --border-radius: 12px;
+    --transition: all 0.4s ease-in-out;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    border-bottom: 3px solid var(--primary-color);
+    padding: 80px 0;
+    margin-bottom: 60px;
+    text-align: center;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Section Styles */
+section {
+    margin: 60px 0;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: var(--transition);
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 32px;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Card Styles */
+.contact, .project, .certification, .hobbies, .languages {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--light-gray);
+    transition: var(--transition);
+}
+
+.project:hover, .certification:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+/* Project Styles */
+.project h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* Skills Section */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.skill {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.skill:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: #4b7bec;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #0a0a0a;
+    color: var(--text-muted);
+    padding: 40px 0;
+    margin-top: 80px;
+    text-align: center;
+    border-top: 1px solid var(--light-gray);
+}
+
+footer a {
+    color: var(--primary-color);
+}
+
+footer a:hover {
+    color: #6c8ff8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 60px 0;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    section {
+        margin: 40px 0;
+    }
+
+    .contact, .project, .certification, .hobbies, .languages {
+        padding: 24px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Selection Style */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+    </style>
+    <script>
+        // Intersection Observer for section animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Aravind Ashok</h1>
+        <p>Electronics and Computer Engineering | Final Year BTech Student</p>
+    </header>
+
+    <div class="container">
+        <section id="contact">
+            <h2>Contact Information</h2>
+            <div class="contact">
+                <p><strong>Address:</strong> Pala, Kottayam</p>
+                <p><strong>Email:</strong> <a href="mailto:aravindashok136@gmail.com">aravindashok136@gmail.com</a></p>
+                <p><strong>Phone:</strong> +91 8078020512</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/aravind-ashok-257854226">linkedin.com/in/aravind-ashok-257854226</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/Aravind136">github.com/Aravind136</a></p>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a dedicated Electronics and Computer Engineering student at St. Joseph's College of Engineering and Technology, Pala. With hands-on experience in technical projects and a passion for technological innovation, I specialize in microelectronics, software development, and embedded systems.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>IC Tester for 74xx Series using Arduino</h3>
+                <p>Developed an automated IC tester using Arduino to streamline digital circuit testing for hobbyists and engineers.</p>
+            </div>
+            <div class="project">
+                <h3>Gym Membership Management System</h3>
+                <p>Built a responsive website with HTML, CSS, and JavaScript, featuring user profile management, progress tracking, and membership registration.</p>
+            </div>
+            <div class="project">
+                <h3>Touchless Doorbell Using IR Sensor</h3>
+                <p>Designed a contactless doorbell using an IR sensor to enhance hygiene and convenience.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">C</div>
+                <div class="skill">Python</div>
+                <div class="skill">Java</div>
+                <div class="skill">SQL</div>
+                <div class="skill">PHP</div>
+                <div class="skill">HTML</div>
+                <div class="skill">CSS</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">Verilog</div>
+                <div class="skill">Arduino</div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certification">
+                <p>Programming in C - IIT Kanpur (NPTEL)</p>
+                <p>Fundamentals of AI - IIT Guwahati (NPTEL)</p>
+                <p>Wheeled Mobile Robots - IIT Madras & IIT Palakkad (NPTEL)</p>
+                <p>Electronics Foundations: Fundamentals - LinkedIn</p>
+                <p>Web Development - Keltron</p>
+                <p>Python - LinkedIn</p>
+            </div>
+        </section>
+
+        <section id="hobbies">
+            <h2>Hobbies</h2>
+            <div class="hobbies">
+                <p>Chess</p>
+                <p>Badminton</p>
+                <p>Cycling</p>
+            </div>
+        </section>
+
+        <section id="languages">
+            <h2>Languages</h2>
+            <div class="languages">
+                <p>English</p>
+                <p>Malayalam</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Aravind Ashok | <a href="mailto:aravindashok136@gmail.com">Contact Me</a></p>
+    </footer>
+</body>
+</html>
+<style>
+    :root {
+    /* Color Palette */
+    --primary-color: #3498db;      /* Vibrant blue for highlights */
+    --background-dark: #121212;    /* Deep dark background */
+    --card-background: #1e1e1e;    /* Slightly lighter dark for cards */
+    --text-primary: #e0e0e0;       /* Light text for dark mode */
+    --text-secondary: #a0a0a0;     /* Muted text color */
+    --accent-color: #2ecc71;       /* Green for positive elements */
+}
+
+body {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Professional Section Styling */
+.section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-10px);
+}
+
+/* Skill Badges */
+.skill-badge {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    transition: background-color 0.3s ease;
+}
+
+.skill-badge:hover {
+    background-color: var(--accent-color);
+}
+
+/* Project Cards */
+.project-card {
+    background-color: var(--background-dark);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.project-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Responsive Typography */
+h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+h2 {
+    color: var(--text-primary);
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* Interactive Links */
+.social-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+</style>
